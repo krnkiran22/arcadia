@@ -9,7 +9,7 @@ import './App.css'
 
 function App() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900">
+    <div className="min-h-screen bg-gradient-to-br from-blue-700 via-blue-800 to-blue-900">
       <Header />
       
       {/* Main Content */}
@@ -20,7 +20,7 @@ function App() {
         </section>
 
         {/* Featured Game and Best Action Games */}
-        <section className="py-8 px-4 max-w-7xl mx-auto">
+        <section className="py-8 px-6 max-w-[90%] mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2">
               <FeaturedGame />
@@ -37,7 +37,7 @@ function App() {
         </section>
 
         {/* All Games */}
-        <section className="py-8 px-4">
+        <section className="py-8 px-6">
           <AllGames />
         </section>
       </main>

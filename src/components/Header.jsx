@@ -11,45 +11,46 @@ const Header = () => {
   ]
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-blue-900 via-blue-800 to-blue-900 shadow-lg">
-      <div className="max-w-7xl mx-auto px-4">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 shadow-lg">
+      <div className="max-w-[90%] mx-auto px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <div className="w-10 h-10 bg-gradient-to-br from-orange-400 to-red-500 rounded-full flex items-center justify-center text-white font-bold text-xl">
-              🎮
+            <div className="w-12 h-12 bg-gradient-to-br from-lime-400 via-green-400 to-lime-500 rounded-xl flex items-center justify-center text-white font-bold text-lg shadow-lg">
+              Kizi
             </div>
-            <span className="ml-3 text-white text-xl font-bold">ARCADIA</span>
           </div>
 
           {/* Navigation Menu */}
-          <nav className="hidden md:flex items-center space-x-6">
-            <button className="bg-lime-500 hover:bg-lime-600 text-black px-4 py-2 rounded-full font-medium transition-colors">
-              TOP GAMES
-            </button>
-            <button className="bg-lime-500 hover:bg-lime-600 text-black px-4 py-2 rounded-full font-medium transition-colors">
-              FAVORITE GAMES
-            </button>
-            <button className="bg-lime-500 hover:bg-lime-600 text-black px-4 py-2 rounded-full font-medium transition-colors">
-              LEADERBOARD
-            </button>
-            <div className="relative">
-              <button 
-                className="bg-lime-500 hover:bg-lime-600 text-black px-4 py-2 rounded-full font-medium transition-colors flex items-center"
-                onClick={() => setShowCategories(!showCategories)}
-              >
-                CATEGORIES
-                <ChevronDownIcon className="w-4 h-4 ml-1" />
+          <nav className="hidden md:flex items-center space-x-4">
+            <div className="bg-lime-500 rounded-full px-6 py-2 flex items-center space-x-4">
+              <button className="text-black font-semibold hover:text-gray-700 transition-colors flex items-center">
+                🎮 TOP GAMES
               </button>
-              {showCategories && (
-                <div className="absolute top-full mt-2 left-0 bg-blue-800 rounded-lg shadow-xl min-w-48 py-2">
-                  <a href="#" className="block px-4 py-2 text-white hover:bg-blue-700">Action</a>
-                  <a href="#" className="block px-4 py-2 text-white hover:bg-blue-700">Adventure</a>
-                  <a href="#" className="block px-4 py-2 text-white hover:bg-blue-700">Puzzle</a>
-                  <a href="#" className="block px-4 py-2 text-white hover:bg-blue-700">Racing</a>
-                  <a href="#" className="block px-4 py-2 text-white hover:bg-blue-700">Sports</a>
-                </div>
-              )}
+              <button className="text-black font-semibold hover:text-gray-700 transition-colors flex items-center">
+                ❤️ FAVORITE GAMES
+              </button>
+              <button className="text-black font-semibold hover:text-gray-700 transition-colors flex items-center">
+                🏆 LEADERBOARD
+              </button>
+              <div className="relative">
+                <button 
+                  className="text-black font-semibold hover:text-gray-700 transition-colors flex items-center"
+                  onClick={() => setShowCategories(!showCategories)}
+                >
+                  📂 CATEGORIES
+                  <ChevronDownIcon className="w-4 h-4 ml-1" />
+                </button>
+                {showCategories && (
+                  <div className="absolute top-full mt-2 left-0 bg-blue-800 rounded-lg shadow-xl min-w-48 py-2">
+                    <a href="#" className="block px-4 py-2 text-white hover:bg-blue-700">Action</a>
+                    <a href="#" className="block px-4 py-2 text-white hover:bg-blue-700">Adventure</a>
+                    <a href="#" className="block px-4 py-2 text-white hover:bg-blue-700">Puzzle</a>
+                    <a href="#" className="block px-4 py-2 text-white hover:bg-blue-700">Racing</a>
+                    <a href="#" className="block px-4 py-2 text-white hover:bg-blue-700">Sports</a>
+                  </div>
+                )}
+              </div>
             </div>
           </nav>
 
@@ -68,7 +69,7 @@ const Header = () => {
             </div>
 
             {/* Login Button */}
-            <button className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-full font-medium transition-colors">
+            <button className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-full font-bold transition-colors">
               LOGIN / SIGNUP
             </button>
 

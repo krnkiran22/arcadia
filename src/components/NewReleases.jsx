@@ -5,13 +5,13 @@ const NewReleases = () => {
   const [currentIndex, setCurrentIndex] = useState(0)
 
   const newGames = [
-    { id: 1, title: 'Dragon Quest', icon: '🐉', releaseDate: '2 days ago', rating: 4.9 },
-    { id: 2, title: 'Space Odyssey', icon: '🌌', releaseDate: '5 days ago', rating: 4.7 },
-    { id: 3, title: 'Medieval Knights', icon: '🛡️', releaseDate: '1 week ago', rating: 4.8 },
-    { id: 4, title: 'Pixel Adventure', icon: '🎮', releaseDate: '1 week ago', rating: 4.6 },
-    { id: 5, title: 'Ocean Explorer', icon: '🌊', releaseDate: '2 weeks ago', rating: 4.5 },
-    { id: 6, title: 'Sky Racer', icon: '✈️', releaseDate: '2 weeks ago', rating: 4.7 },
-    { id: 7, title: 'Magic Forest', icon: '🌳', releaseDate: '3 weeks ago', rating: 4.4 }
+    { id: 1, title: 'Star Stable', color: 'bg-gradient-to-br from-pink-400 to-purple-500', releaseDate: '2 days ago', rating: 4.9 },
+    { id: 2, title: 'Ocean Adventure', color: 'bg-gradient-to-br from-blue-400 to-teal-500', releaseDate: '5 days ago', rating: 4.7 },
+    { id: 3, title: 'Pixel Quest', color: 'bg-gradient-to-br from-green-400 to-blue-500', releaseDate: '1 week ago', rating: 4.8 },
+    { id: 4, title: 'Sky Racing', color: 'bg-gradient-to-br from-yellow-400 to-orange-500', releaseDate: '1 week ago', rating: 4.6 },
+    { id: 5, title: 'Magic World', color: 'bg-gradient-to-br from-purple-400 to-pink-500', releaseDate: '2 weeks ago', rating: 4.5 },
+    { id: 6, title: 'Space Wars', color: 'bg-gradient-to-br from-gray-600 to-blue-600', releaseDate: '2 weeks ago', rating: 4.7 },
+    { id: 7, title: 'Forest Adventure', color: 'bg-gradient-to-br from-green-500 to-teal-500', releaseDate: '3 weeks ago', rating: 4.4 }
   ]
 
   const itemsPerView = 4
@@ -26,7 +26,7 @@ const NewReleases = () => {
   }
 
   return (
-    <div className="px-4 max-w-7xl mx-auto">
+    <div className="px-6 max-w-[90%] mx-auto">
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-white text-2xl font-bold">New Releases</h2>
         <div className="flex space-x-2">
@@ -89,8 +89,8 @@ const NewReleases = () => {
                   </div>
 
                   {/* Game Icon */}
-                  <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center text-3xl mb-4 shadow-lg mx-auto">
-                    {game.icon}
+                  <div className={`w-16 h-16 ${game.color} rounded-2xl flex items-center justify-center text-white font-bold text-xs mb-4 shadow-lg mx-auto`}>
+                    {game.title.split(' ')[0]}
                   </div>
 
                   {/* Game Info */}

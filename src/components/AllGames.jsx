@@ -6,22 +6,22 @@ const AllGames = () => {
   const totalPages = 11
 
   const allGames = [
-    { id: 1, title: 'Adventure Quest', plays: '62987', icon: '🗡️', category: 'Adventure' },
-    { id: 2, title: 'Racing Thunder', plays: '89245', icon: '🏎️', category: 'Racing' },
-    { id: 3, title: 'Puzzle Master', plays: '45621', icon: '🧩', category: 'Puzzle' },
-    { id: 4, title: 'Space Invaders', plays: '78934', icon: '👾', category: 'Arcade' },
-    { id: 5, title: 'Football Pro', plays: '56789', icon: '⚽', category: 'Sports' },
-    { id: 6, title: 'Magic Castle', plays: '67234', icon: '🏰', category: 'Fantasy' },
-    { id: 7, title: 'Ninja Fight', plays: '89567', icon: '🥷', category: 'Action' },
-    { id: 8, title: 'Ocean Explorer', plays: '34567', icon: '🌊', category: 'Adventure' },
-    { id: 9, title: 'Robot Wars', plays: '78901', icon: '🤖', category: 'Action' },
-    { id: 10, title: 'Farm Life', plays: '45678', icon: '🚜', category: 'Simulation' },
-    { id: 11, title: 'Dragon Slayer', plays: '92345', icon: '🐲', category: 'RPG' },
-    { id: 12, title: 'Sky Jump', plays: '56234', icon: '🪂', category: 'Adventure' },
-    { id: 13, title: 'Cookie Clicker', plays: '123456', icon: '🍪', category: 'Casual' },
-    { id: 14, title: 'Zombie Run', plays: '67890', icon: '🧟‍♂️', category: 'Action' },
-    { id: 15, title: 'Chess Master', plays: '34512', icon: '♟️', category: 'Strategy' },
-    { id: 16, title: 'Dance Battle', plays: '78234', icon: '💃', category: 'Music' }
+    { id: 1, title: 'Puzzle Blocks Asmr', plays: '62987', color: 'bg-gradient-to-br from-pink-400 to-red-500', category: 'Puzzle' },
+    { id: 2, title: 'Bubble Shooter', plays: '69421', color: 'bg-gradient-to-br from-blue-400 to-green-500', category: 'Puzzle' },
+    { id: 3, title: 'Kings and Queens Solitaire', plays: '36576', color: 'bg-gradient-to-br from-yellow-400 to-orange-500', category: 'Card' },
+    { id: 4, title: 'Wonders of Ancient World', plays: '57728', color: 'bg-gradient-to-br from-blue-500 to-purple-500', category: 'Adventure' },
+    { id: 5, title: 'Wild West Klondike', plays: '35753', color: 'bg-gradient-to-br from-orange-500 to-red-600', category: 'Adventure' },
+    { id: 6, title: 'Mustang City Driver', plays: '167174', color: 'bg-gradient-to-br from-blue-600 to-gray-700', category: 'Racing' },
+    { id: 7, title: 'Citymix Solitaire', plays: '151040', color: 'bg-gradient-to-br from-purple-500 to-pink-500', category: 'Card' },
+    { id: 8, title: 'Machine City Balls', plays: '468226', color: 'bg-gradient-to-br from-orange-400 to-red-500', category: 'Puzzle' },
+    { id: 9, title: 'DOP Stickman Jailbreak', plays: '689224', color: 'bg-gradient-to-br from-gray-500 to-black', category: 'Puzzle' },
+    { id: 10, title: 'Dynamons 5', plays: '382472', color: 'bg-gradient-to-br from-blue-500 to-purple-600', category: 'Adventure' },
+    { id: 11, title: 'Save the Baby Elsa', plays: '536672', color: 'bg-gradient-to-br from-blue-300 to-pink-400', category: 'Care' },
+    { id: 12, title: 'Skibidi Toilet G-man', plays: '326433', color: 'bg-gradient-to-br from-gray-600 to-blue-600', category: 'Action' },
+    { id: 13, title: 'Park Me', plays: '504831', color: 'bg-gradient-to-br from-green-500 to-blue-500', category: 'Puzzle' },
+    { id: 14, title: 'Protect My Dog', plays: '635080', color: 'bg-gradient-to-br from-yellow-400 to-orange-500', category: 'Puzzle' },
+    { id: 15, title: 'Fireboy and Watergirl 4', plays: '4701537', color: 'bg-gradient-to-br from-red-500 to-blue-500', category: 'Adventure' },
+    { id: 16, title: 'Bob the Robber 2', plays: '2981585', color: 'bg-gradient-to-br from-green-600 to-gray-700', category: 'Adventure' }
   ]
 
   const pageNumbers = []
@@ -38,7 +38,7 @@ const AllGames = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto">
+    <div className="max-w-[90%] mx-auto">
       {/* Header */}
       <div className="mb-8">
         <h2 className="text-white text-3xl font-bold mb-2">All Games</h2>
@@ -50,18 +50,18 @@ const AllGames = () => {
         {allGames.map((game) => (
           <div
             key={game.id}
-            className="bg-gradient-to-br from-blue-800 to-blue-900 rounded-2xl p-4 hover:scale-105 hover:shadow-2xl transition-all duration-300 cursor-pointer border border-blue-700 hover:border-lime-400 group"
+            className="bg-gradient-to-br from-blue-700 to-blue-800 rounded-2xl p-4 hover:scale-105 hover:shadow-2xl transition-all duration-300 cursor-pointer border border-blue-600 hover:border-lime-400 group relative"
           >
             {/* Game Thumbnail */}
-            <div className="aspect-square bg-gradient-to-br from-purple-600 to-blue-600 rounded-xl mb-4 flex items-center justify-center text-4xl shadow-lg group-hover:shadow-xl transition-shadow">
-              {game.icon}
+            <div className={`aspect-square ${game.color} rounded-xl mb-4 flex items-center justify-center text-white font-bold text-xs shadow-lg group-hover:shadow-xl transition-shadow`}>
+              {game.title.split(' ')[0]}
             </div>
 
             {/* Game Info */}
             <div className="text-center">
               <h3 className="text-white font-semibold text-sm mb-1 truncate">{game.title}</h3>
               <p className="text-blue-300 text-xs mb-2">{game.plays} Plays</p>
-              <div className="bg-blue-700 text-blue-200 px-2 py-1 rounded-full text-xs">
+              <div className="bg-blue-600 text-blue-200 px-2 py-1 rounded-full text-xs">
                 {game.category}
               </div>
             </div>
@@ -96,10 +96,10 @@ const AllGames = () => {
           <button
             key={pageNum}
             onClick={() => setCurrentPage(pageNum)}
-            className={`w-10 h-10 rounded-lg font-medium transition-colors ${
+            className={`w-10 h-10 rounded-lg font-bold transition-colors ${
               currentPage === pageNum
                 ? 'bg-lime-500 text-black'
-                : 'bg-blue-700 text-white hover:bg-blue-600'
+                : 'bg-blue-600 text-white hover:bg-blue-500'
             }`}
           >
             {pageNum}
@@ -110,26 +110,23 @@ const AllGames = () => {
         <button
           onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
           disabled={currentPage === totalPages}
-          className={`px-3 py-2 rounded-lg font-medium transition-colors ${
+          className={`px-4 py-2 rounded-lg font-bold transition-colors ${
             currentPage === totalPages
               ? 'bg-gray-600 text-gray-400 cursor-not-allowed'
               : 'bg-lime-500 text-black hover:bg-lime-600'
           }`}
         >
-          NEXT
+          NEXT &gt;
         </button>
 
         {/* Last Page Button */}
         {currentPage < totalPages - 2 && (
-          <>
-            <span className="text-gray-400">...</span>
-            <button
-              onClick={() => setCurrentPage(totalPages)}
-              className="px-3 py-2 bg-lime-500 text-black rounded-lg font-medium hover:bg-lime-600 transition-colors"
-            >
-              {'>>'}
-            </button>
-          </>
+          <button
+            onClick={() => setCurrentPage(totalPages)}
+            className="px-3 py-2 bg-lime-500 text-black rounded-lg font-bold hover:bg-lime-600 transition-colors"
+          >
+            {'>>'}
+          </button>
         )}
       </div>
 

@@ -5,13 +5,13 @@ const GameSeriesCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0)
 
   const gameSeries = [
-    { id: 1, name: 'Moto X3M', icon: '🏍️', games: 15 },
-    { id: 2, name: 'Bob The Robber', icon: '🕵️', games: 8 },
-    { id: 3, name: 'Kizi Adventures', icon: '🌟', games: 12 },
-    { id: 4, name: 'Fireboy & Watergirl', icon: '🔥', games: 6 },
-    { id: 5, name: 'Papa\'s Games', icon: '👨‍🍳', games: 20 },
-    { id: 6, name: 'Subway Surfers', icon: '🚇', games: 5 },
-    { id: 7, name: 'Temple Run', icon: '🏃', games: 4 }
+    { id: 1, name: 'Moto X3M', icon: '🏍️', games: 15, color: 'from-blue-600 to-blue-700' },
+    { id: 2, name: 'Bob The Robber', icon: '🕵️', games: 8, color: 'from-blue-600 to-blue-700' },
+    { id: 3, name: 'Kizi', icon: '🌟', games: 12, color: 'from-blue-600 to-blue-700' },
+    { id: 4, name: 'Wheely', icon: '�', games: 6, color: 'from-blue-600 to-blue-700' },
+    { id: 5, name: 'Fireboy & Watergirl', icon: '🔥�', games: 20, color: 'from-blue-600 to-blue-700' },
+    { id: 6, name: 'Snail Bob', icon: '�', games: 5, color: 'from-blue-600 to-blue-700' },
+    { id: 7, name: 'Dynamons', icon: '⚡', games: 4, color: 'from-blue-600 to-blue-700' }
   ]
 
   const itemsPerView = 4
@@ -26,7 +26,7 @@ const GameSeriesCarousel = () => {
   }
 
   return (
-    <div className="px-4 max-w-7xl mx-auto">
+    <div className="px-6 max-w-[90%] mx-auto">
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-white text-2xl font-bold">Game Series</h2>
         <div className="flex space-x-2">
@@ -76,15 +76,14 @@ const GameSeriesCarousel = () => {
           >
             {gameSeries.map((series) => (
               <div key={series.id} className="flex-none w-1/4 px-2">
-                <div className="bg-gradient-to-br from-blue-700 to-blue-800 border border-blue-600 rounded-2xl p-4 hover:scale-105 transition-transform cursor-pointer shadow-lg">
+                <div className={`bg-gradient-to-br ${series.color} border border-blue-500 rounded-2xl p-4 hover:scale-105 transition-transform cursor-pointer shadow-lg`}>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-3">
-                      <div className="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center text-2xl">
+                      <div className="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center text-lg">
                         {series.icon}
                       </div>
                       <div>
-                        <h3 className="text-white font-semibold text-sm">{series.name}</h3>
-                        <p className="text-blue-300 text-xs">{series.games} games</p>
+                        <h3 className="text-white font-bold text-sm">{series.name}</h3>
                       </div>
                     </div>
                     <div className="w-8 h-8 bg-lime-500 hover:bg-lime-600 rounded-full flex items-center justify-center transition-colors">
