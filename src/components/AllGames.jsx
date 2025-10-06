@@ -1,11 +1,17 @@
 import { useState } from 'react'
 
-const AllGames = () => {
+const AllGames = ({ onGameSelect }) => {
   const [currentPage, setCurrentPage] = useState(1)
   const gamesPerPage = 16
   const totalPages = 11
 
   const allGames = [
+    // New playable games
+    { id: 'chess', title: 'Chess vs Bot', plays: '1250000', color: 'bg-gradient-to-br from-gray-800 to-gray-900', category: 'Strategy', playable: true },
+    { id: 'tictactoe', title: 'Tic Tac Toe', plays: '890000', color: 'bg-gradient-to-br from-blue-500 to-purple-600', category: 'Strategy', playable: true },
+    { id: 'snakeladder', title: 'Snake & Ladder', plays: '750000', color: 'bg-gradient-to-br from-green-500 to-yellow-500', category: 'Board Game', playable: true },
+    { id: 'wheel', title: 'Wheel of Fortune', plays: '420000', color: 'bg-gradient-to-br from-purple-500 to-pink-500', category: 'Casino', playable: true },
+    // Existing games
     { id: 1, title: 'Puzzle Blocks Asmr', plays: '62987', color: 'bg-gradient-to-br from-pink-400 to-red-500', category: 'Puzzle' },
     { id: 2, title: 'Bubble Shooter', plays: '69421', color: 'bg-gradient-to-br from-blue-400 to-green-500', category: 'Puzzle' },
     { id: 3, title: 'Kings and Queens Solitaire', plays: '36576', color: 'bg-gradient-to-br from-yellow-400 to-orange-500', category: 'Card' },
@@ -17,11 +23,7 @@ const AllGames = () => {
     { id: 9, title: 'DOP Stickman Jailbreak', plays: '689224', color: 'bg-gradient-to-br from-gray-500 to-black', category: 'Puzzle' },
     { id: 10, title: 'Dynamons 5', plays: '382472', color: 'bg-gradient-to-br from-blue-500 to-purple-600', category: 'Adventure' },
     { id: 11, title: 'Save the Baby Elsa', plays: '536672', color: 'bg-gradient-to-br from-blue-300 to-pink-400', category: 'Care' },
-    { id: 12, title: 'Skibidi Toilet G-man', plays: '326433', color: 'bg-gradient-to-br from-gray-600 to-blue-600', category: 'Action' },
-    { id: 13, title: 'Park Me', plays: '504831', color: 'bg-gradient-to-br from-green-500 to-blue-500', category: 'Puzzle' },
-    { id: 14, title: 'Protect My Dog', plays: '635080', color: 'bg-gradient-to-br from-yellow-400 to-orange-500', category: 'Puzzle' },
-    { id: 15, title: 'Fireboy and Watergirl 4', plays: '4701537', color: 'bg-gradient-to-br from-red-500 to-blue-500', category: 'Adventure' },
-    { id: 16, title: 'Bob the Robber 2', plays: '2981585', color: 'bg-gradient-to-br from-green-600 to-gray-700', category: 'Adventure' }
+    { id: 12, title: 'Skibidi Toilet G-man', plays: '326433', color: 'bg-gradient-to-br from-gray-600 to-blue-600', category: 'Action' }
   ]
 
   const pageNumbers = []
@@ -50,8 +52,18 @@ const AllGames = () => {
         {allGames.map((game) => (
           <div
             key={game.id}
-            className="bg-gradient-to-br from-blue-700 to-blue-800 rounded-2xl p-4 hover:scale-105 hover:shadow-2xl transition-all duration-300 cursor-pointer border border-blue-600 hover:border-lime-400 group relative"
+            onClick={() => game.playable && onGameSelect && onGameSelect(game.id)}
+            className={`bg-gradient-to-br from-blue-700 to-blue-800 rounded-2xl p-4 hover:scale-105 hover:shadow-2xl transition-all duration-300 border border-blue-600 hover:border-lime-400 group relative ${
+              game.playable ? 'cursor-pointer' : 'cursor-default'
+            }`}
           >
+            {/* Playable Badge */}
+            {game.playable && (
+              <div className="absolute top-2 right-2 bg-lime-500 text-black text-xs font-bold px-2 py-1 rounded-full z-10">
+                PLAYABLE
+              </div>
+            )}
+
             {/* Game Thumbnail */}
             <div className={`aspect-square ${game.color} rounded-xl mb-4 flex items-center justify-center text-white font-bold text-xs shadow-lg group-hover:shadow-xl transition-shadow`}>
               {game.title.split(' ')[0]}
@@ -68,8 +80,12 @@ const AllGames = () => {
 
             {/* Hover Overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl flex items-center justify-center">
-              <button className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-full font-medium transform translate-y-4 group-hover:translate-y-0 transition-transform">
-                Play Now
+              <button className={`px-4 py-2 rounded-full font-medium transform translate-y-4 group-hover:translate-y-0 transition-transform ${
+                game.playable 
+                  ? 'bg-lime-500 hover:bg-lime-600 text-black' 
+                  : 'bg-orange-500 hover:bg-orange-600 text-white'
+              }`}>
+                {game.playable ? 'Play Game' : 'Coming Soon'}
               </button>
             </div>
           </div>

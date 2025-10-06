@@ -1,11 +1,11 @@
-const BestActionGames = () => {
+const BestActionGames = ({ onGameSelect }) => {
   const actionGames = [
-    { id: 1, title: 'Fireboy and Watergirl', plays: '2.1M', color: 'bg-gradient-to-br from-red-500 to-blue-500' },
-    { id: 2, title: 'Dynamons 5', plays: '1.8M', color: 'bg-gradient-to-br from-blue-500 to-purple-500' },
+    { id: 'chess', title: 'Chess vs Bot', plays: '1.2M', color: 'bg-gradient-to-br from-gray-800 to-gray-900', playable: true },
+    { id: 'tictactoe', title: 'Tic Tac Toe', plays: '890K', color: 'bg-gradient-to-br from-blue-500 to-purple-600', playable: true },
     { id: 3, title: 'Bob the Robber 2', plays: '1.5M', color: 'bg-gradient-to-br from-green-600 to-gray-700' },
-    { id: 4, title: 'Fireboy and Watergirl 2', plays: '2.3M', color: 'bg-gradient-to-br from-orange-500 to-blue-500' },
+    { id: 'snakeladder', title: 'Snake & Ladder', plays: '750K', color: 'bg-gradient-to-br from-green-500 to-yellow-500', playable: true },
     { id: 5, title: 'Snail Bob 5', plays: '980K', color: 'bg-gradient-to-br from-green-500 to-yellow-500' },
-    { id: 6, title: 'Bob the Robber', plays: '1.2M', color: 'bg-gradient-to-br from-gray-600 to-green-600' }
+    { id: 'wheel', title: 'Wheel of Fortune', plays: '420K', color: 'bg-gradient-to-br from-purple-500 to-pink-500', playable: true }
   ]
 
   return (
@@ -23,10 +23,20 @@ const BestActionGames = () => {
         {actionGames.map((game) => (
           <div
             key={game.id}
-            className="bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl p-3 hover:scale-105 transition-all cursor-pointer shadow-lg border border-blue-500 hover:border-lime-400"
+            onClick={() => game.playable && onGameSelect && onGameSelect(game.id)}
+            className={`bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl p-3 hover:scale-105 transition-all shadow-lg border border-blue-500 hover:border-lime-400 relative ${
+              game.playable ? 'cursor-pointer' : 'cursor-default'
+            }`}
           >
+            {/* Playable Badge */}
+            {game.playable && (
+              <div className="absolute top-1 right-1 bg-lime-500 text-black text-xs font-bold px-1 py-0.5 rounded z-10">
+                PLAY
+              </div>
+            )}
+
             {/* Game Thumbnail */}
-            <div className={`w-full h-24 ${game.color} rounded-lg flex items-center justify-center text-white font-bold text-xs mb-3 shadow-md`}>
+            <div className={`w-full h-16 ${game.color} rounded-lg flex items-center justify-center text-white font-bold text-xs mb-3 shadow-md`}>
               {game.title.split(' ')[0]}
             </div>
 

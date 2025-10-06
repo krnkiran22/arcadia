@@ -5,9 +5,41 @@ import FeaturedGame from './components/FeaturedGame'
 import BestActionGames from './components/BestActionGames'
 import NewReleases from './components/NewReleases'
 import AllGames from './components/AllGames'
+import ChessGame from './components/games/ChessGame'
+import TicTacToeGame from './components/games/TicTacToeGame'
+import SnakeAndLadderGame from './components/games/SnakeAndLadderGame'
+import WheelGame from './components/games/WheelGame'
 import './App.css'
 
 function App() {
+  const [currentView, setCurrentView] = useState('home')
+
+  const handleGameSelect = (gameName) => {
+    setCurrentView(gameName)
+  }
+
+  const handleBackToHome = () => {
+    setCurrentView('home')
+  }
+
+  // Render specific game based on current view
+  if (currentView === 'chess') {
+    return <ChessGame onBackToHome={handleBackToHome} />
+  }
+  
+  if (currentView === 'tictactoe') {
+    return <TicTacToeGame onBackToHome={handleBackToHome} />
+  }
+  
+  if (currentView === 'snakeladder') {
+    return <SnakeAndLadderGame onBackToHome={handleBackToHome} />
+  }
+  
+  if (currentView === 'wheel') {
+    return <WheelGame onBackToHome={handleBackToHome} />
+  }
+
+  // Home view
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-700 via-blue-800 to-blue-900">
       <Header />
@@ -26,7 +58,7 @@ function App() {
               <FeaturedGame />
             </div>
             <div className="lg:col-span-1">
-              <BestActionGames />
+              <BestActionGames onGameSelect={handleGameSelect} />
             </div>
           </div>
         </section>
@@ -38,7 +70,7 @@ function App() {
 
         {/* All Games */}
         <section className="py-8 px-6">
-          <AllGames />
+          <AllGames onGameSelect={handleGameSelect} />
         </section>
       </main>
     </div>
