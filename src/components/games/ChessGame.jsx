@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { Chess } from 'chess.js';
 import Chessground from 'react-chessground';
+import 'react-chessground/dist/styles/chessground.css';
 import { RotateCcw, Home, Trophy } from 'lucide-react';
 
 const ChessGame = ({ onBackToHome }) => {
@@ -110,23 +111,26 @@ const ChessGame = ({ onBackToHome }) => {
     return currentGame.turn() === 'w' ? 'white' : 'black';
   };
 
-  const calcMovable = () => {
-    const currentGame = new Chess(fen);
+  const getDests = () => {
     const dests = new Map();
-    currentGame.moves({ verbose: true }).forEach(m => {
+    game.moves({ verbose: true }).forEach(m => {
       if (!dests.has(m.from)) dests.set(m.from, []);
       dests.get(m.from).push(m.to);
     });
+    return dests;
+  };
+
+  const calcMovable = () => {
     return {
       free: false,
-      dests,
-      color: isPlayerTurn ? 'white' : undefined
+      dests: getDests(),
+      color: isPlayerTurn ? (game.turn() === "w" ? "white" : "black") : "none"
     };
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 p-4">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-7xl mx-auto h-full flex flex-col">
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
           <button
@@ -148,81 +152,111 @@ const ChessGame = ({ onBackToHome }) => {
           </button>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Game Info */}
-          <div className="bg-blue-800 rounded-xl p-6">
-            <h2 className="text-white text-xl font-bold mb-4">Game Status</h2>
-            
-            <div className="space-y-4">
-              <div className="bg-blue-700 rounded-lg p-4">
-                <div className="text-blue-300 text-sm mb-1">Current Turn</div>
-                <div className="text-white font-semibold">
-                  {thinking ? 'Bot is thinking...' : 
-                   isPlayerTurn ? 'Your Turn (White)' : 'Bot Turn (Black)'}
-                </div>
-              </div>
+        {/* Main Game Area */}
+        <div className="flex-1 min-h-[600px]">
 
-              <div className="bg-blue-700 rounded-lg p-4">
-                <div className="text-blue-300 text-sm mb-1">Game Mode</div>
-                <div className="text-white font-semibold">Player vs Bot</div>
-              </div>
-
-              {gameOver && (
-                <div className="bg-gradient-to-r from-orange-500 to-red-500 rounded-lg p-4">
-                  <div className="flex items-center space-x-2 text-white">
-                    <Trophy className="w-5 h-5" />
-                    <div>
-                      <div className="font-bold">Game Over!</div>
-                      <div className="text-sm">Winner: {winner}</div>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {thinking && (
-                <div className="bg-yellow-600 rounded-lg p-4">
-                  <div className="text-white text-sm">
-                    🤖 Bot is calculating the best move...
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* Chess Board */}
-          <div className="lg:col-span-2">
-            <div className="bg-blue-800 rounded-xl p-6">
-              <div className="w-full max-w-lg mx-auto">
-                <div className="aspect-square bg-white rounded-lg p-2">
-                  <Chessground
-                    fen={fen}
-                    onMove={onMove}
-                    turnColor={turnColor()}
-                    movable={calcMovable()}
-                    viewOnly={!isPlayerTurn || gameOver}
-                    width={400}
-                    height={400}
-                    coordinates={true}
-                    animation={{
-                      enabled: true,
-                      duration: 200
-                    }}
-                    highlight={{
-                      lastMove: true,
-                      check: true
-                    }}
-                  />
-                </div>
-              </div>
-              
-              <div className="mt-4 text-center">
+        <div className="flex flex-col lg:flex-row gap-6 h-full">
+          {/* Chess Board - Make it the main focus */}
+          <div className="flex-1 lg:flex-[2]">
+            <div className="bg-blue-800 rounded-xl p-6 h-full">
+              <div className="text-center mb-4">
                 <div className="text-blue-300 text-sm">
-                  {new Chess(fen).isCheck() && !gameOver && 'Check! '}
+                  {game.isCheck() && !gameOver && 'Check! '}
                   You are playing as White (bottom pieces)
                 </div>
               </div>
+              
+              <div className="flex items-center justify-center flex-1">
+                <div className="w-full max-w-[600px] aspect-square rounded-lg overflow-hidden">
+                  <div className="w-full h-full">
+                    <Chessground
+                      width="100%"
+                      height="100%"
+                      fen={fen}
+                      turnColor={game.turn() === "w" ? "white" : "black"}
+                      movable={{
+                        free: false,
+                        color: isPlayerTurn ? (game.turn() === "w" ? "white" : "black") : "none",
+                        dests: calcMovable().dests,
+                      }}
+                      onMove={onMove}
+                      coordinates={true}
+                      highlight={{
+                        lastMove: true,
+                        check: true,
+                      }}
+                      animation={{
+                        enabled: true,
+                        duration: 300,
+                      }}
+                      viewOnly={!isPlayerTurn || gameOver}
+                      drawable={{
+                        visible: true,
+                        defaultSnapToValidMove: true,
+                        eraseOnClick: false,
+                      }}
+                      premovable={{
+                        enabled: true
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
+
+          {/* Game Info - Sidebar */}
+          <div className="w-full lg:w-80">
+            <div className="bg-blue-800 rounded-xl p-6 h-full">
+              <h2 className="text-white text-xl font-bold mb-6">Game Status</h2>
+              
+              <div className="space-y-4">
+                <div className="bg-blue-700 rounded-lg p-4">
+                  <div className="text-blue-300 text-sm mb-1">Current Turn</div>
+                  <div className="text-white font-semibold">
+                    {thinking ? 'Bot is thinking...' : 
+                     isPlayerTurn ? 'Your Turn (White)' : 'Bot Turn (Black)'}
+                  </div>
+                </div>
+
+                <div className="bg-blue-700 rounded-lg p-4">
+                  <div className="text-blue-300 text-sm mb-1">Game Mode</div>
+                  <div className="text-white font-semibold">Player vs Bot</div>
+                </div>
+
+                {gameOver && (
+                  <div className="bg-gradient-to-r from-orange-500 to-red-500 rounded-lg p-4">
+                    <div className="flex items-center space-x-2 text-white">
+                      <Trophy className="w-5 h-5" />
+                      <div>
+                        <div className="font-bold">Game Over!</div>
+                        <div className="text-sm">Winner: {winner}</div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {thinking && (
+                  <div className="bg-yellow-600 rounded-lg p-4">
+                    <div className="text-white text-sm">
+                      🤖 Bot is calculating the best move...
+                    </div>
+                  </div>
+                )}
+
+                <div className="bg-blue-700 rounded-lg p-4">
+                  <div className="text-blue-300 text-sm mb-2">How to Play</div>
+                  <ul className="text-white text-xs space-y-1">
+                    <li>• Drag pieces to move</li>
+                    <li>• You play as White</li>
+                    <li>• Bot plays as Black</li>
+                    <li>• Checkmate to win!</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         </div>
       </div>
     </div>

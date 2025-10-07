@@ -10,25 +10,32 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ayshrj/ludo.js": "^1.0.10",
     "@heroicons/react": "^2.2.0",
+    "@nanowiz/ludo.js": "^1.0.0",
     "@tailwindcss/vite": "^4.1.14",
+    "boardgame.io": "^0.50.2",
     "chess.js": "^1.4.0",
-    "framer-motion": "^12.23.22",
-    "lucide-react": "^0.544.0",
-    "react": "^19.1.1",
+    "framer-motion": "^11.15.0",
+    "konva": "^9.2.0",
+    "lucide-react": "^0.445.0",
+    "ludo-game": "^1.0.1",
+    "react": "^18.3.1",
     "react-chessground": "^1.5.0",
-    "react-dom": "^19.1.1",
+    "react-dom": "^18.3.1",
+    "react-konva": "^18.2.10",
     "tailwindcss": "^4.1.14"
   },
   "devDependencies": {
-    "@eslint/js": "^9.36.0",
-    "@types/react": "^19.1.16",
-    "@types/react-dom": "^19.1.9",
-    "@vitejs/plugin-react": "^5.0.4",
-    "eslint": "^9.36.0",
-    "eslint-plugin-react-hooks": "^5.2.0",
-    "eslint-plugin-react-refresh": "^0.4.22",
-    "globals": "^16.4.0",
-    "vite": "^7.1.7"
+    "@eslint/js": "^9.15.0",
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "eslint": "^9.15.0",
+    "eslint-plugin-react": "^7.37.2",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-react-refresh": "^0.4.14",
+    "globals": "^15.12.0",
+    "vite": "^6.0.1"
   }
 }

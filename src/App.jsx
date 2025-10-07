@@ -7,9 +7,10 @@ import NewReleases from './components/NewReleases'
 import AllGames from './components/AllGames'
 import ChessGame from './components/games/ChessGame'
 import TicTacToeGame from './components/games/TicTacToeGame'
-import SnakeAndLadderGame from './components/games/SnakeAndLadderGame'
+import EnhancedSnakeAndLadderGame from './components/games/EnhancedSnakeAndLadderGame'
+import FlappyBirdGame from './components/games/FlappyBirdGame'
+import ChessStyleLudoGame from './components/games/ChessStyleLudoGame'
 import WheelGame from './components/games/WheelGame'
-import './App.css'
 
 function App() {
   const [currentView, setCurrentView] = useState('home')
@@ -31,8 +32,16 @@ function App() {
     return <TicTacToeGame onBackToHome={handleBackToHome} />
   }
   
-  if (currentView === 'snakeladder') {
-    return <SnakeAndLadderGame onBackToHome={handleBackToHome} />
+  if (currentView === 'enhanced-snakeladder') {
+    return <EnhancedSnakeAndLadderGame onBackToHome={handleBackToHome} />
+  }
+  
+  if (currentView === 'ludo') {
+    return <ChessStyleLudoGame onBackToHome={handleBackToHome} />
+  }
+  
+  if (currentView === 'flappybird') {
+    return <FlappyBirdGame onBackToHome={handleBackToHome} />
   }
   
   if (currentView === 'wheel') {

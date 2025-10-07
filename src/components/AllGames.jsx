@@ -6,10 +6,12 @@ const AllGames = ({ onGameSelect }) => {
   const totalPages = 11
 
   const allGames = [
-    // New playable games
+    // New playable games - cleaned up duplicates
     { id: 'chess', title: 'Chess vs Bot', plays: '1250000', color: 'bg-gradient-to-br from-gray-800 to-gray-900', category: 'Strategy', playable: true },
     { id: 'tictactoe', title: 'Tic Tac Toe', plays: '890000', color: 'bg-gradient-to-br from-blue-500 to-purple-600', category: 'Strategy', playable: true },
-    { id: 'snakeladder', title: 'Snake & Ladder', plays: '750000', color: 'bg-gradient-to-br from-green-500 to-yellow-500', category: 'Board Game', playable: true },
+    { id: 'enhanced-snakeladder', title: 'Snake & Ladder', plays: '1250000', color: 'bg-gradient-to-br from-emerald-600 to-teal-600', category: 'Board Game', playable: true },
+    { id: 'flappybird', title: 'Flappy Bird', plays: '2100000', color: 'bg-gradient-to-br from-sky-400 to-blue-600', category: 'Arcade', playable: true },
+    { id: 'ludo', title: 'Ludo Game', plays: '1850000', color: 'bg-gradient-to-br from-red-500 to-yellow-500', category: 'Board Game', playable: true },
     { id: 'wheel', title: 'Wheel of Fortune', plays: '420000', color: 'bg-gradient-to-br from-purple-500 to-pink-500', category: 'Casino', playable: true },
     // Existing games
     { id: 1, title: 'Puzzle Blocks Asmr', plays: '62987', color: 'bg-gradient-to-br from-pink-400 to-red-500', category: 'Puzzle' },

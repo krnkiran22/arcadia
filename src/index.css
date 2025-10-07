@@ -50,6 +50,8 @@ html {
   animation: float 3s ease-in-out infinite;
 }
 
+/* Chessground styling - minimal overrides */
+
 /* Chess board customization */
 .cg-wrap {
   width: 100%;
