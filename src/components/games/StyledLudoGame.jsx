@@ -24,13 +24,13 @@ const StyledLudoGame = ({ onBackToHome }) => {
     isAnimating: false
   });
 
-  // Starting positions for each player (corrected)
-  const startPositions = [0, 13, 26, 39]; // Red, Green, Blue, Yellow
+  // Starting positions for each player (matched to corrected home positions)
+  const startPositions = [26, 39, 0, 13]; // Red, Green, Blue, Yellow
   const homeStretch = {
-    0: [50, 49, 48, 47, 46, 45], // Red home path
-    1: [11, 10, 9, 8, 7, 6],     // Green home path  
-    2: [24, 23, 22, 21, 20, 19], // Blue home path
-    3: [37, 36, 35, 34, 33, 32]  // Yellow home path
+    0: [24, 23, 22, 21, 20, 19], // Red home path (from bottom-right)
+    1: [37, 36, 35, 34, 33, 32], // Green home path (from top-right) 
+    2: [50, 49, 48, 47, 46, 45], // Blue home path (from bottom-left)
+    3: [11, 10, 9, 8, 7, 6]      // Yellow home path (from top-left)
   };
 
   // Safe positions where pieces can't be captured
@@ -58,12 +58,12 @@ const StyledLudoGame = ({ onBackToHome }) => {
     49: { x: 47, y: 60 }, 50: { x: 47, y: 53 }, 51: { x: 47, y: 47 }
   };
 
-  // Home positions for pieces not on board (corrected positioning)
+  // Home positions for pieces not on board (properly matched to board colors)
   const homePositions = {
-    0: [{ x: 17, y: 67 }, { x: 27, y: 67 }, { x: 17, y: 77 }, { x: 27, y: 77 }], // Red (bottom-left)
-    1: [{ x: 17, y: 17 }, { x: 27, y: 17 }, { x: 17, y: 27 }, { x: 27, y: 27 }], // Green (top-left)
-    2: [{ x: 67, y: 67 }, { x: 77, y: 67 }, { x: 67, y: 77 }, { x: 77, y: 77 }], // Blue (bottom-right)
-    3: [{ x: 67, y: 17 }, { x: 77, y: 17 }, { x: 67, y: 27 }, { x: 77, y: 27 }]  // Yellow (top-right)
+    0: [{ x: 67, y: 67 }, { x: 77, y: 67 }, { x: 67, y: 77 }, { x: 77, y: 77 }], // Red (bottom-right - RED AREA)
+    1: [{ x: 67, y: 17 }, { x: 77, y: 17 }, { x: 67, y: 27 }, { x: 77, y: 27 }], // Green (top-right - GREEN AREA)
+    2: [{ x: 17, y: 67 }, { x: 27, y: 67 }, { x: 17, y: 77 }, { x: 27, y: 77 }], // Blue (bottom-left - BLUE AREA)
+    3: [{ x: 17, y: 17 }, { x: 27, y: 17 }, { x: 17, y: 27 }, { x: 27, y: 27 }]  // Yellow (top-left - YELLOW AREA)
   };
 
   const getDiceIcon = (value) => {
@@ -336,7 +336,7 @@ const StyledLudoGame = ({ onBackToHome }) => {
         </div>
 
         {/* Game Controls */}
-        <div className="w-full lg:w-80 space-y-6">
+        <div className="w-72 space-y-4">
           {/* Current Player */}
           <div className="bg-slate-800 rounded-lg p-6 border border-slate-700">
             <h3 className="text-lg font-semibold mb-4">Current Player</h3>

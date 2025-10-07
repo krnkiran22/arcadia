@@ -4,28 +4,28 @@ import { motion, AnimatePresence } from 'framer-motion';
 const ChessStyleLudoGame = ({ onBackToHome }) => {
   // Game state
   const [gameState, setGameState] = useState({
-    currentPlayer: 0, // 0: Red, 1: Green, 2: Blue, 3: Yellow
+    currentPlayer: 0, // 0: Red, 1: Blue
     diceValue: null,
     canRollDice: true,
     gameStarted: false,
     winner: null
   });
 
-  // Player colors and names
+  // Player colors and names (4-player game)
   const players = [
     { name: 'Red', color: '#EF4444', id: 'red' },
-    { name: 'Green', color: '#22C55E', id: 'green' }, 
     { name: 'Blue', color: '#3B82F6', id: 'blue' },
-    { name: 'Yellow', color: '#EAB308', id: 'yellow' }
+    { name: 'Yellow', color: '#EAB308', id: 'yellow' },
+    { name: 'Green', color: '#22C55E', id: 'green' }
   ];
 
-  // Initialize piece positions - all pieces start in their home areas
+  // Initialize piece positions - all pieces start in their home areas (4-player game)
   const initializePieces = () => {
     return {
       red: [0, 1, 2, 3].map(i => ({ id: i, position: -1, isInHome: true, isFinished: false })),
-      green: [0, 1, 2, 3].map(i => ({ id: i, position: -1, isInHome: true, isFinished: false })),
       blue: [0, 1, 2, 3].map(i => ({ id: i, position: -1, isInHome: true, isFinished: false })),
-      yellow: [0, 1, 2, 3].map(i => ({ id: i, position: -1, isInHome: true, isFinished: false }))
+      yellow: [0, 1, 2, 3].map(i => ({ id: i, position: -1, isInHome: true, isFinished: false })),
+      green: [0, 1, 2, 3].map(i => ({ id: i, position: -1, isInHome: true, isFinished: false }))
     };
   };
 
@@ -53,29 +53,30 @@ const ChessStyleLudoGame = ({ onBackToHome }) => {
     49: { x: 33, y: 150 }, 50: { x: 33, y: 183 }, 51: { x: 33, y: 217 }
   };
 
-  // Starting positions for each player
-  const startPositions = { red: 0, green: 13, blue: 26, yellow: 39 };
+  // Starting positions for each player (4-player game)
+  const startPositions = { red: 25, blue: 12, yellow: 38, green: 51 };
   
   // Safe positions (star positions)
   const safePositions = [0, 8, 13, 21, 26, 34, 39, 47];
 
   // Home area coordinates for pieces (scaled for 500x500 board)
+  // Fixed positioning: red = bottom-left, blue = bottom-right
   const homeCoordinates = {
     red: [
-      { x: 50, y: 350 }, { x: 100, y: 350 },
-      { x: 50, y: 400 }, { x: 100, y: 400 }
-    ],
-    green: [
-      { x: 350, y: 50 }, { x: 400, y: 50 },
-      { x: 350, y: 100 }, { x: 400, y: 100 }
+      { x: 380, y: 380 }, { x: 420, y: 380 },
+      { x: 380, y: 420 }, { x: 420, y: 420 }
     ],
     blue: [
-      { x: 350, y: 350 }, { x: 400, y: 350 },
-      { x: 350, y: 400 }, { x: 400, y: 400 }
+      { x: 80, y: 380 }, { x: 120, y: 380 },
+      { x: 80, y: 420 }, { x: 120, y: 420 }
     ],
     yellow: [
-      { x: 50, y: 50 }, { x: 100, y: 50 },
-      { x: 50, y: 100 }, { x: 100, y: 100 }
+      { x: 80, y: 80 }, { x: 120, y: 80 },
+      { x: 80, y: 120 }, { x: 120, y: 120 }
+    ],
+    green: [
+      { x: 380, y: 80 }, { x: 420, y: 80 },
+      { x: 380, y: 120 }, { x: 420, y: 120 }
     ]
   };
 
@@ -177,7 +178,7 @@ const ChessStyleLudoGame = ({ onBackToHome }) => {
     }, 1000);
   };
 
-  // Next player's turn
+  // Next player's turn (4-player game)
   const nextTurn = () => {
     setGameState(prev => ({
       ...prev,
@@ -281,9 +282,9 @@ const ChessStyleLudoGame = ({ onBackToHome }) => {
         </motion.button>
       </div>
 
-      <div className="flex gap-8 p-6">
+      <div className="flex gap-6 p-6">
         {/* Game Board */}
-        <div className="flex-1 flex items-center justify-start pl-4">
+        <div className="flex-1 flex items-center justify-center">
           <div className="relative bg-white rounded-2xl shadow-2xl overflow-hidden" style={{ width: '500px', height: '500px' }}>
             {/* Board Background */}
             <div 
