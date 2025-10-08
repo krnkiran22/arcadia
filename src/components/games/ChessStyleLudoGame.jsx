@@ -55,6 +55,9 @@ const ChessStyleLudoGame = ({ onBackToHome }) => {
 
   // Starting positions for each player (4-player game)
   const startPositions = { red: 25, blue: 12, yellow: 38, green: 51 };
+
+
+
   
   // Safe positions (star positions)
   const safePositions = [0, 8, 13, 21, 26, 34, 39, 47];
@@ -83,7 +86,7 @@ const ChessStyleLudoGame = ({ onBackToHome }) => {
   // Roll dice function
   const rollDice = useCallback(() => {
     if (!gameState.canRollDice) return;
-    
+
     const newDiceValue = Math.floor(Math.random() * 6) + 1;
     setGameState(prev => ({
       ...prev,
@@ -102,25 +105,25 @@ const ChessStyleLudoGame = ({ onBackToHome }) => {
   const findEligiblePieces = (diceValue) => {
     const currentPlayerKey = players[gameState.currentPlayer].id;
     const playerPieces = pieces[currentPlayerKey];
-    
+
     const eligible = playerPieces.filter(piece => {
       // If piece is in home, can only move with 6
       if (piece.isInHome) {
         return diceValue === 6;
       }
-      
+
       // If piece is finished, can't move
       if (piece.isFinished) {
         return false;
       }
-      
+
       // Check if move would go beyond finish line
       const newPosition = (piece.position + diceValue) % 52;
       return true; // Simplified for now
     });
 
     setEligiblePieces(eligible.map(p => p.id));
-    
+
     if (eligible.length === 0) {
       // No moves possible, next player's turn
       setTimeout(() => {
@@ -132,7 +135,7 @@ const ChessStyleLudoGame = ({ onBackToHome }) => {
   // Handle piece selection
   const selectPiece = (pieceId) => {
     if (!eligiblePieces.includes(pieceId)) return;
-    
+
     setSelectedPiece(pieceId);
     movePiece(pieceId);
   };
@@ -140,7 +143,7 @@ const ChessStyleLudoGame = ({ onBackToHome }) => {
   // Move piece
   const movePiece = (pieceId) => {
     const currentPlayerKey = players[gameState.currentPlayer].id;
-    
+
     setPieces(prev => ({
       ...prev,
       [currentPlayerKey]: prev[currentPlayerKey].map(piece => {
@@ -221,7 +224,7 @@ const ChessStyleLudoGame = ({ onBackToHome }) => {
         onClick={() => selectPiece(piece.id)}
         whileHover={{ scale: isEligible ? 1.1 : 1 }}
         whileTap={{ scale: 0.9 }}
-        animate={isEligible ? { 
+        animate={isEligible ? {
           boxShadow: ['0 0 0 0 rgba(255,255,255,0.7)', '0 0 0 10px rgba(255,255,255,0)', '0 0 0 0 rgba(255,255,255,0.7)']
         } : {}}
         transition={{ duration: 1, repeat: isEligible ? Infinity : 0 }}
@@ -239,7 +242,7 @@ const ChessStyleLudoGame = ({ onBackToHome }) => {
 
     return homePieces.map((piece, index) => {
       const coords = homeCoords[index] || homeCoords[0]; // Fallback to first position
-      
+
       return (
         <div
           key={`home-${playerKey}-${piece.id}`}
@@ -269,9 +272,9 @@ const ChessStyleLudoGame = ({ onBackToHome }) => {
           </svg>
           Back to Games
         </motion.button>
-        
+
         <h1 className="text-3xl font-bold">Ludo Game</h1>
-        
+
         <motion.button
           onClick={resetGame}
           className="px-6 py-2 bg-green-600 hover:bg-green-500 rounded-lg font-medium transition-colors"
@@ -287,7 +290,7 @@ const ChessStyleLudoGame = ({ onBackToHome }) => {
         <div className="flex-1 flex items-center justify-center">
           <div className="relative bg-white rounded-2xl shadow-2xl overflow-hidden" style={{ width: '500px', height: '500px' }}>
             {/* Board Background */}
-            <div 
+            <div
               className="w-full h-full bg-cover bg-center relative"
               style={{ backgroundImage: 'url(/ludo-bg.jpg)' }}
             >
@@ -295,7 +298,7 @@ const ChessStyleLudoGame = ({ onBackToHome }) => {
               {Object.keys(pieces).map(playerKey => renderHomePieces(playerKey))}
 
               {/* Board Path - Pieces that are in play */}
-              {Object.entries(pieces).map(([playerKey, playerPieces]) => 
+              {Object.entries(pieces).map(([playerKey, playerPieces]) =>
                 playerPieces
                   .filter(piece => !piece.isInHome && !piece.isFinished)
                   .map(piece => {
@@ -321,17 +324,17 @@ const ChessStyleLudoGame = ({ onBackToHome }) => {
         {/* Game Status Panel */}
         <div className="w-64 space-y-4">
           {/* Current Turn */}
-          <motion.div 
+          <motion.div
             className="bg-blue-800/50 backdrop-blur-sm rounded-xl p-6"
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
           >
             <h3 className="text-xl font-bold mb-4 text-center">Game Status</h3>
-            
+
             <div className="space-y-4">
               <div>
                 <p className="text-blue-300 mb-2">Current Turn</p>
-                <div 
+                <div
                   className="px-4 py-2 rounded-lg text-white font-semibold text-center"
                   style={{ backgroundColor: currentPlayer.color }}
                 >
@@ -349,14 +352,14 @@ const ChessStyleLudoGame = ({ onBackToHome }) => {
           </motion.div>
 
           {/* Dice Section */}
-          <motion.div 
+          <motion.div
             className="bg-blue-800/50 backdrop-blur-sm rounded-xl p-6"
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.1 }}
           >
             <h3 className="text-xl font-bold mb-4 text-center">Dice</h3>
-            
+
             <div className="flex flex-col items-center space-y-4">
               <motion.div
                 className="w-20 h-20 bg-white rounded-xl shadow-lg flex items-center justify-center text-4xl font-bold text-gray-800 border-4 border-gray-300"
@@ -365,15 +368,14 @@ const ChessStyleLudoGame = ({ onBackToHome }) => {
               >
                 {gameState.diceValue || '?'}
               </motion.div>
-              
+
               <motion.button
                 onClick={rollDice}
                 disabled={!gameState.canRollDice}
-                className={`px-6 py-3 rounded-xl font-semibold transition-all ${
-                  gameState.canRollDice 
-                    ? 'bg-green-600 hover:bg-green-500 text-white shadow-lg hover:shadow-xl' 
+                className={`px-6 py-3 rounded-xl font-semibold transition-all ${gameState.canRollDice
+                    ? 'bg-green-600 hover:bg-green-500 text-white shadow-lg hover:shadow-xl'
                     : 'bg-gray-600 text-gray-400 cursor-not-allowed'
-                }`}
+                  }`}
                 whileHover={gameState.canRollDice ? { scale: 1.05 } : {}}
                 whileTap={gameState.canRollDice ? { scale: 0.95 } : {}}
               >
